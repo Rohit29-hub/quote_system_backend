@@ -3,7 +3,7 @@ dotenv.config();
 import './config/db';
 import app from './app';
 
-const PORT = 8000;
+const PORT = process.env.PORT;
 
 
 app.listen(PORT, function(){
