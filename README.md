@@ -1,19 +1,11 @@
-# After Analazation
+# Welcome To Instant Quote System Backend
+This is a incomplete baceknd of quote system.
+# Approach (What have I done)
 
-1. Service also contain information about:- 
-    => this service is for home or not.
-    => service contain relevent questions
-2. Three phases of quoute system
-   1. general information, 2. Service details, 3. get quoute
-
-   => general information => aksing about
-    1) Where did you hear about us?
-    2) What type of project is this? [residentails,commercials]
-    3) if residentails && service_type_is_home ? some home images : empty,
-    4) if commercials && service_type_is_home ? two input fields : one input field,
-    5) Getting personal user information
-
-   => service details => asking some relvent question that we can analaze the qoute for the user.
-     1) Question contains images,paragraph,title. or inputs fields
-     2) Answer type:- redio,images, number input, selectio. required or not
-     3) But questions depend on user answer. i mean 3 or 4 question depnend on user first answer. 
+| Step | Approach              |
+|------|-----------------------|
+| 1    | I defined the schema for our service_data and question_data using Mongoose and set up relationships between them.  |
+| 2    | I handle routes. For example, I have created a controller to define the logic for the `question_add`,`get_service`,`add_service`, `get_questions` route, which currently handles the addition of new questions.   |
+| 3    | I connect to MongoDB to store various types of data, including service_data, question_data, and additional information such as `service_data` , `question_data` and etc .   |
+| 4    | I make seprate files and folder for different functionality.       |
+| 5    | In end i deploy my express and nodejs backend to render. |
