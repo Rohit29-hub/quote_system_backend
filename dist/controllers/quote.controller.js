@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getQuote = void 0;
-// i can make the api for managain quote_data
-// but i have not much time now.
+// i can make api routes for quote.
+// i am building..., I know time is over.
 const quote_data = [
     {
         service_id: "66d96e888e8f7383faacd17e",
@@ -423,8 +423,18 @@ const quote_data = [
         ],
     },
 ];
+/**
+ *
+ *   selectedServices, ==> selected services
+ *   user_info, => user_information
+ *   question_answers, => questions's answer
+ *   aboutProjectData, => user project info like home size, company,comapany size
+ *
+ */
 const getQuote = (req, res) => {
-    const selectedServices = req.body.selectedServices;
+    const { selectedServices, user_info, questions_answer } = req.body;
+    // we can also take the quote data according to the user answer but i need more time. 
+    console.log(user_info);
     try {
         const data = quote_data
             .filter(service => selectedServices.includes(service.service_id))

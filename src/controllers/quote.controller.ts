@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
-// i can make the api for managain quote_data
-// but i have not much time now.
+// i can make api routes for quote.
+// i am building..., I know time is over.
 
 const quote_data = [
     {
@@ -434,10 +434,10 @@ const quote_data = [
  */
 
 export const getQuote = (req: Request, res: Response) => {
-    const {selectedServices, user_data,questions_answer} = req.body;
+    const {selectedServices, user_info,questions_answer} = req.body;
 
     // we can also take the quote data according to the user answer but i need more time. 
-    console.log(user_data);
+    console.log(user_info);
     
     try {
         const data = quote_data
