@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import ServiceModel from "../models/service.model";
 
+// for admin purpose add the service
 export const addService = async (req: Request, res: Response) => {
     const {
         service_title,
@@ -56,49 +57,3 @@ export const getService = async (req: Request, res: Response) => {
         });
     }
 }
-
-export const getQuestion = async (req: Request, res: Response) => {
-    const serviceIds = req.body.serviceIds;
-
-    if (!Array.isArray(serviceIds) || serviceIds.length === 0) {
-        return res.status(400).json({
-            message: 'Invalid input. Provide an array of service IDs.',
-            success: false,
-            status: false
-        });
-    }
-
-    try {
-        const servicesData = await ServiceModel.find({
-            _id: { $in: serviceIds } 
-        }).populate('service_general_question')
-
-        if (servicesData.length === 0) {
-            return res.status(404).json({
-                message: 'No services found for the provided IDs.',
-                success: false,
-                status: false
-            });
-        }
-
-        const result = servicesData.map(service => ({
-            service_name: service.service_title,
-            questions: service.service_general_question || []
-        }));
-
-        res.status(200).json({
-            message: 'Questions retrieved successfully',
-            data: result,
-            success: true,
-            status: true
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: 'An error occurred while fetching questions.',
-            success: false,
-            status: false
-        });
-    }
-};

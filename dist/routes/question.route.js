@@ -7,4 +7,5 @@ const express_1 = __importDefault(require("express"));
 const question_controller_1 = require("../controllers/question.controller");
 const router = express_1.default.Router();
 router.route('/:serviceId/add_question').post(question_controller_1.addQuestions);
+router.route('/get_questions').post(question_controller_1.getQuestion);
 exports.default = router;

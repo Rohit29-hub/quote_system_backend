@@ -7,15 +7,15 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const serviceSchema = new mongoose_1.default.Schema({
     service_title: {
         type: String,
-        required: true,
+        required: [true, "Service name is required"],
     },
     service_image_url: {
         type: String,
-        required: true
+        required: [true, "Service image is required"]
     },
     service_type_is_home: {
         type: Boolean,
-        required: true,
+        required: [true, "Service type is required"],
     },
     service_general_question: [{
             type: mongoose_1.default.Schema.Types.ObjectId,

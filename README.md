@@ -9,3 +9,9 @@ This is a incomplete baceknd of quote system.
 | 3    | I connect to MongoDB to store various types of data, including service_data, question_data, and additional information such as `service_data` , `question_data` and etc .   |
 | 4    | I make seprate files and folder for different functionality.       |
 | 5    | In end i deploy my express and nodejs backend to render. |
+
+
+-> if question type is radio so store the next_question in the array that will be ask if the question yes ortherwise not ask.
+-> make schema for user and store them into database
+-> store quote data in db. (we can also update automatic according to their answer);
+-> add comment to backend

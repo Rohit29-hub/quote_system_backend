@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getQuestion = exports.getService = exports.addService = void 0;
+exports.getService = exports.addService = void 0;
 const service_model_1 = __importDefault(require("../models/service.model"));
+// for admin purpose add the service
 const addService = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { service_title, service_image_url, service_type_is_home, service_general_question } = req.body;
     try {
@@ -60,44 +61,3 @@ const getService = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.getService = getService;
-const getQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const serviceIds = req.body.serviceIds;
-    if (!Array.isArray(serviceIds) || serviceIds.length === 0) {
-        return res.status(400).json({
-            message: 'Invalid input. Provide an array of service IDs.',
-            success: false,
-            status: false
-        });
-    }
-    try {
-        const servicesData = yield service_model_1.default.find({
-            _id: { $in: serviceIds }
-        }).populate('service_general_question');
-        if (servicesData.length === 0) {
-            return res.status(404).json({
-                message: 'No services found for the provided IDs.',
-                success: false,
-                status: false
-            });
-        }
-        const result = servicesData.map(service => ({
-            service_name: service.service_title,
-            questions: service.service_general_question || []
-        }));
-        res.status(200).json({
-            message: 'Questions retrieved successfully',
-            data: result,
-            success: true,
-            status: true
-        });
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: 'An error occurred while fetching questions.',
-            success: false,
-            status: false
-        });
-    }
-});
-exports.getQuestion = getQuestion;

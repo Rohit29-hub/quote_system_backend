@@ -1,17 +1,21 @@
 import express from 'express';
 import serviceRoutes from './routes/service.route'
 import questionRoute from './routes/question.route'
+import quoteRoute from './routes/quote.route'
 import cors from 'cors'
 const app = express();
 
 
 // ***** middlewares and config *****
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: '*'
+}))
 
 // ***** Routes *****
 app.use('/service/v1', serviceRoutes);
 app.use('/question/v1',questionRoute);
+app.use('/quote/v1',quoteRoute);
 
 
 app.get('/', function(req,res){

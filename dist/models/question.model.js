@@ -24,22 +24,26 @@ const questionSchema = new mongoose_1.default.Schema({
     },
     question_answer_type: {
         type: String,
-        enum: ['button', 'select', 'label_quantity_input_field', 'radio', 'image_quantity_input_field'],
+        enum: ['select', 'radio', 'image_quantity_input_field'],
         required: true
     },
     question_image: {
         type: String,
+        default: null,
     },
-    next_question_id: {
+    next_questions: [{
+            type: mongoose_1.default.Schema.Types.ObjectId,
+            ref: 'QuestionModel',
+        }],
+    depends_on_question_id: {
         type: String,
-        default: null
+        default: ""
     },
     question_description: {
         type: String,
+        default: null
     },
-    question_options: [optionSchema],
-    minQuantity: { type: Number, default: 0 },
-    maxQuantity: { type: Number, default: 10 },
+    question_options: [optionSchema]
 }, {
     timestamps: true
 });
