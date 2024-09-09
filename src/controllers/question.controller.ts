@@ -3,7 +3,7 @@ import QuestionModel from "../models/question.model";
 import ServiceModel from "../models/service.model";
 
 // get Question for the selected services
-export const getQuestion = async (req: Request, res: Response) => {
+export const getQuestions = async (req: Request, res: Response) => {
     const serviceIds = req.body.serviceIds;
 
     if (!Array.isArray(serviceIds) || serviceIds.length === 0) {
@@ -55,6 +55,7 @@ export const getQuestion = async (req: Request, res: Response) => {
         });
     }
 };
+
 
 /**
  * [addQuestions] for admin purpose
@@ -136,10 +137,13 @@ export const addQuestions = async (req: Request, res: Response) => {
             const parentQuestion = await QuestionModel.findOne({
                 _id: depends_on_question_id
             })
-            // and put the this question id to their [next_question] array.
-            parentQuestion.next_questions.push(newQuestion._id);
-            // and save the question for save the changes
-            await parentQuestion.save();
+            
+            if(parentQuestion){
+                // and put the this question id to their [next_question] array.
+                parentQuestion.next_questions.push(newQuestion._id);
+                // and save the question for save the changes
+                await parentQuestion.save();
+            }
         }
         
         // return successfull response.

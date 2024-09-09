@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.addQuestions = exports.getQuestion = void 0;
+exports.addQuestions = exports.getQuestions = void 0;
 const question_model_1 = __importDefault(require("../models/question.model"));
 const service_model_1 = __importDefault(require("../models/service.model"));
 // get Question for the selected services
-const getQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const serviceIds = req.body.serviceIds;
     if (!Array.isArray(serviceIds) || serviceIds.length === 0) {
         return res.status(400).json({
@@ -63,7 +63,7 @@ const getQuestion = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
 });
-exports.getQuestion = getQuestion;
+exports.getQuestions = getQuestions;
 /**
  * [addQuestions] for admin purpose
  *
@@ -127,10 +127,12 @@ const addQuestions = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             const parentQuestion = yield question_model_1.default.findOne({
                 _id: depends_on_question_id
             });
-            // and put the this question id to their [next_question] array.
-            parentQuestion.next_questions.push(newQuestion._id);
-            // and save the question for save the changes
-            yield parentQuestion.save();
+            if (parentQuestion) {
+                // and put the this question id to their [next_question] array.
+                parentQuestion.next_questions.push(newQuestion._id);
+                // and save the question for save the changes
+                yield parentQuestion.save();
+            }
         }
         // return successfull response.
         return res.status(200).json({

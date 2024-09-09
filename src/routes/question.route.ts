@@ -1,7 +1,7 @@
 import express from 'express';
 import {
     addQuestions as addQuestionController,
-    getQuestion as getQuestionController
+    getQuestions as getQuestionController
 } from '../controllers/question.controller';
 const router = express.Router();
 
